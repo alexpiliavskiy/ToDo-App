@@ -5,7 +5,7 @@ const CreateTodoField = ({ setTodos }) => {
   const [isError, setIsError] = useState(false);
 
   const addTodo = () => {
-    if (!title.trim()) {
+    if (!title.length) {
       setIsError(true);
       return;
     }

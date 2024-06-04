@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoItem from "./item/TodoItem";
 import CreateTodoField from "./Create-todo-field/CreateTodoField";
 
@@ -6,6 +6,11 @@ const data = [];
 
 const Home = () => {
   const [todos, setTodos] = useState(data);
+  const [counterTodo, setCounterTodo] = useState(0);
+
+  useEffect(() => {
+    setCounterTodo(todos.length);
+  }, [todos]);
 
   const changeTodo = (id) => {
     const copy = [...todos];
@@ -33,6 +38,9 @@ const Home = () => {
 
   return (
     <div className="text-white w-4/5 mx-auto">
+      <span className="font-bold bg-gray-700 p-2 rounded-lg">
+        Total Todos: {counterTodo}
+      </span>
       <h1 className="text-4xl font-bold text-center mb-8">To Do App</h1>
       <CreateTodoField setTodos={setTodos} />
       {todos.length <= 0 && (
