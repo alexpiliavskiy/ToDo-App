@@ -35,7 +35,7 @@ const TodoItem = ({ todo, changeTodo, removeTodo, updateTodo }) => {
               ref={editInputTitleRef}
               value={editCurrentTitle}
               onChange={(event) => setEditCurrentTitle(event.target.value)}
-              className="bg-transparent w-full border-none outline-none p-1а "
+              className="bg-transparent w-full border-none outline-none p-1"
             />
           </form>
         ) : (
