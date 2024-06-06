@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TodoItem from "./item/TodoItem";
 import CreateTodoField from "./Create-todo-field/CreateTodoField";
+import Context from "../Context";
 
 const data = [];
 
@@ -36,26 +37,29 @@ const Home = () => {
     );
   };
 
+  const value = {
+    removeTodo,
+    changeTodo,
+    updateTodo,
+    setTodos,
+  };
+
   return (
-    <div className="text-white w-4/5 mx-auto">
-      <span className="font-bold bg-gray-700 p-2 rounded-lg">
-        Total Todos: {counterTodo}
-      </span>
-      <h1 className="text-4xl font-bold text-center mb-8">To Do App</h1>
-      <CreateTodoField setTodos={setTodos} />
-      {todos.length <= 0 && (
-        <p className="font-bold text-red-500">There is no one task!</p>
-      )}
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          changeTodo={changeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
-      ))}
-    </div>
+    <Context.Provider value={value}>
+      <div className="text-white w-4/5 mx-auto">
+        <span className="font-bold bg-gray-700 p-2 rounded-lg mb-5">
+          Total Tasks: {counterTodo}
+        </span>
+        <h1 className="text-4xl font-bold text-center mb-8 mt-10">To Do App</h1>
+        <CreateTodoField />
+        {todos.length <= 0 && (
+          <p className="font-bold text-red-500">There is no one task!</p>
+        )}
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
+      </div>
+    </Context.Provider>
   );
 };
 

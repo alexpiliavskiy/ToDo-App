@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import Check from "./Check";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import cn from "classnames";
 import { BsPencil, BsTrash } from "react-icons/bs";
+import Check from "./Check";
+import Context from "../../Context";
 
-const TodoItem = ({ todo, changeTodo, removeTodo, updateTodo }) => {
+const TodoItem = ({ todo }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editCurrentTitle, setEditCurrentTitle] = useState(todo.title);
   const editInputTitleRef = useRef(null);
 
+  const value = useContext(Context);
+
   const handleEditSubmit = (event) => {
     event.preventDefault();
-    updateTodo(todo.id, editCurrentTitle);
+    value.updateTodo(todo.id, editCurrentTitle);
     setIsEditing(false);
   };
 
@@ -22,7 +25,10 @@ const TodoItem = ({ todo, changeTodo, removeTodo, updateTodo }) => {
 
   return (
     <div className="flex items-center justify-between mb-4 rounded-2xl bg-gray-800 p-5 w-full">
-      <button className="flex items-center" onClick={() => changeTodo(todo.id)}>
+      <button
+        className="flex items-center"
+        onClick={() => value.changeTodo(todo.id)}
+      >
         <Check isCompleted={todo.isCompleted} />
         {isEditing ? (
           <form
@@ -65,7 +71,7 @@ const TodoItem = ({ todo, changeTodo, removeTodo, updateTodo }) => {
             />
           </button>
         )}
-        <button onClick={() => removeTodo(todo.id)}>
+        <button onClick={() => value.removeTodo(todo.id)}>
           <BsTrash
             size={22}
             className="text-gray-600 hover:text-red-700 transition-colors ease-in duration-300"

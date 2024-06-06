@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Context from "../../Context";
 
-const CreateTodoField = ({ setTodos }) => {
+const CreateTodoField = () => {
   const [title, setTitle] = useState("");
   const [isError, setIsError] = useState(false);
+
+  const value = useContext(Context);
 
   const addTodo = () => {
     if (!title.length) {
@@ -10,7 +13,7 @@ const CreateTodoField = ({ setTodos }) => {
       return;
     }
     setIsError(false);
-    setTodos((prev) => [
+    value.setTodos((prev) => [
       {
         id: new Date(),
         title,
