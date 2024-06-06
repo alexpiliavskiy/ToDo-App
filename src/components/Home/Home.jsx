@@ -50,10 +50,10 @@ const Home = () => {
     <Context.Provider value={value}>
       <div className="text-white w-4/5 mx-auto">
         <span className="font-bold bg-gray-700 p-2 rounded-lg mb-5">
-          Total Tasks: {counterTodo}
+          Total Task: {counterTodo}
         </span>
         <span className="font-bold bg-green-600 p-2 rounded-lg ml-5 mb-5">
-          Done Tasks: {counterDoneTodo}
+          Done Task: {counterDoneTodo}
         </span>
         <h1 className="text-4xl font-bold text-center mb-8 mt-10">To Do App</h1>
         <CreateTodoField />
