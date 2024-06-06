@@ -8,9 +8,11 @@ const data = [];
 const Home = () => {
   const [todos, setTodos] = useState(data);
   const [counterTodo, setCounterTodo] = useState(0);
+  const [counterDoneTodo, setCounterDoneTodo] = useState(0);
 
   useEffect(() => {
     setCounterTodo(todos.length);
+    setCounterDoneTodo(todos.filter((todo) => todo.isCompleted).length);
   }, [todos]);
 
   const changeTodo = (id) => {
@@ -49,6 +51,9 @@ const Home = () => {
       <div className="text-white w-4/5 mx-auto">
         <span className="font-bold bg-gray-700 p-2 rounded-lg mb-5">
           Total Tasks: {counterTodo}
+        </span>
+        <span className="font-bold bg-green-600 p-2 rounded-lg ml-5 mb-5">
+          Done Tasks: {counterDoneTodo}
         </span>
         <h1 className="text-4xl font-bold text-center mb-8 mt-10">To Do App</h1>
         <CreateTodoField />
